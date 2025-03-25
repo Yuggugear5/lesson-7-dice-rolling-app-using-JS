@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #dice {
+                font-size: 100px;  /* Make the numbers large */
+                text-align: center;
+                line-height: 200px;  /* Center the number vertically */
+                width: 200px;  /* Set a fixed width for the dice */
+                height: 200px;  /* Set a fixed height for the dice */
+                border: 2px solid black;  /* Border around the dice */
+                border-radius: 10px;  /* Rounded corners */
+                display: inline-block;  /* Ensure the dice stays in a block */
+            }
+        </style>
+    </head>
+    <body>
+        <div>Click on the number cube....</div>
+        <div id="dice" onclick="stopstart()"></div>
+
+        <script>
+            var dice;
+            var numbers = ['1', '2', '3', '4', '5', '6'];  // Use numbers for the dice faces
+            var stopped = true;
+            var t;
+
+            // Function to randomly change the dice number
+            function change() {
+                var random = Math.floor(Math.random() * 6);  // Get a random number between 0 and 5
+                dice.innerHTML = numbers[random];  // Display the corresponding number
+            }
+
+            // Function to start or stop the dice change
+            function stopstart() {
+                if (stopped) {
+                    stopped = false;
+                    t = setInterval(change, 100);  // Start changing every 100ms
+                } else {
+                    clearInterval(t);  // Stop changing numbers
+                    stopped = true;
+                }
+            }
+
+            // Initialize the dice and set an initial click event handler
+            window.onload = function() {
+                dice = document.getElementById("dice");
+                stopstart();  // Start the dice changing as soon as the page loads
+            }
+        </script>
+    </body>
+</html>
